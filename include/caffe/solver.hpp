@@ -6,6 +6,7 @@
 
 #include "caffe/net.hpp"
 #include "caffe/solver_factory.hpp"
+#include "caffe/util/benchmark.hpp" // add by zhangfeng
 
 namespace caffe {
 
@@ -129,6 +130,9 @@ class Solver {
 
   // True iff a request to stop early was received.
   bool requested_early_exit_;
+
+  Timer iteration_timer_; // add by zhangfeng
+  float iterations_last_;//add by zhangfeng
 
   DISABLE_COPY_AND_ASSIGN(Solver);
 };

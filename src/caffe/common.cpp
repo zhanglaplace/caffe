@@ -12,6 +12,10 @@
 #include "caffe/common.hpp"
 #include "caffe/util/rng.hpp"
 
+#include <boost/date_time.hpp>
+#include <process.h>
+#include <direct.h>
+
 namespace caffe {
 
 // Make sure each thread can have different values.
@@ -44,6 +48,27 @@ int64_t cluster_seedgen(void) {
   return seed;
 }
 
+
+// add by zhangfeng For generate log file
+void initGlog() {
+	FLAGS_log_dir = "D:\\Deeplearning\\Caffe-Microsft-ssd\\caffe\\log\\";//存放日志文件的文件夹路径，我们可以自己指定
+	_mkdir(FLAGS_log_dir.c_str());
+	std::string LOG_INFO_FILE;
+	std::string LOG_WARNING_FILE;
+	std::string LOG_ERROR_FILE;
+	std::string LOG_FATAL_FILE;
+	std::string now_time = boost::posix_time::to_iso_extended_string(boost::posix_time::second_clock::local_time());
+	now_time[13] = '-';
+	now_time[16] = '-';
+	LOG_INFO_FILE = FLAGS_log_dir + "INFO" + now_time + ".txt";
+	google::SetLogDestination(google::GLOG_INFO, LOG_INFO_FILE.c_str());
+	LOG_WARNING_FILE = FLAGS_log_dir + "WARNING" + now_time + ".txt";
+	google::SetLogDestination(google::GLOG_WARNING, LOG_WARNING_FILE.c_str());
+	LOG_ERROR_FILE = FLAGS_log_dir + "ERROR" + now_time + ".txt";
+	google::SetLogDestination(google::GLOG_ERROR, LOG_ERROR_FILE.c_str());
+	LOG_FATAL_FILE = FLAGS_log_dir + "FATAL" + now_time + ".txt";
+	google::SetLogDestination(google::GLOG_FATAL, LOG_FATAL_FILE.c_str());
+}
 
 void GlobalInit(int* pargc, char*** pargv) {
   // Google flags.
