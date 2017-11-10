@@ -51,7 +51,7 @@ int64_t cluster_seedgen(void) {
 
 // add by zhangfeng For generate log file
 void initGlog() {
-	FLAGS_log_dir = "D:\\Deeplearning\\Caffe-Microsft-ssd\\caffe\\log\\";//存放日志文件的文件夹路径，我们可以自己指定
+	FLAGS_log_dir = "D:\\Deeplearning\\Caffe-ssd-Microsft\\caffe\\log\\";//存放日志文件的文件夹路径，我们可以自己指定
 	_mkdir(FLAGS_log_dir.c_str());
 	std::string LOG_INFO_FILE;
 	std::string LOG_WARNING_FILE;
